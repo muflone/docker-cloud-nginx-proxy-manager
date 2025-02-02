@@ -1,0 +1,19 @@
+services:
+  app:
+    container_name: nginx-proxy-manager
+    image: jc21/nginx-proxy-manager:2.12.2
+    restart: unless-stopped
+    networks:
+      - public
+    ports:
+      - 80:80/tcp
+      - 443:443/tcp
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+networks:
+  public:
+    external: true
+
